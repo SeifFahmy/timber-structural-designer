@@ -1,0 +1,6 @@
+.root {
+    background-color: white;
+    align-items: center;
+    padding: var(--mantine-spacing-md);
+    border-radius: var(--mantine-radius-md);
+}
