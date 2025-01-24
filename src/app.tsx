@@ -1,9 +1,9 @@
-import { createRoot } from "react-dom/client";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import "@mantine/charts/styles.layer.css";
+import "@mantine/core/styles.layer.css";
 
 import { Container, MantineProvider } from "@mantine/core";
-import "@mantine/core/styles.layer.css";
-import "@mantine/charts/styles.layer.css";
+import { createRoot } from "react-dom/client";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./routes/home";
 
