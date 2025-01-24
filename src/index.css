@@ -1,12 +1,42 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Helvetica, Arial, sans-serif;
+    font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
     margin: auto;
     max-width: 38rem;
     padding: 2rem;
     height: 100vh;
 
-    background: #FAC898;
+    background-color: #fac898;
+    background-image: url("/static/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     /* background: linear-gradient(135deg, #ce9519, #e5c57c); */
     /* background-image: linear-gradient(-60deg, #67b382 0%, #3d7b53 100%); */
+}
+
+button {
+    transition: background-color 0.2s ease;
+}
+
+::selection {
+    background-color: color-mix(
+        in srgb,
+        var(--mantine-color-teal-filled) 70%,
+        transparent
+    );
+}
+
+@font-face {
+    font-family: "Work Sans";
+    src: url("/static/fonts/WorkSans[wght].ttf") format("truetype");
+    font-style: normal;
+    font-weight: 100 900;
+}
+
+@font-face {
+    font-family: "Work Sans";
+    src: url("/static/fonts/WorkSans-Italic[wght].ttf") format("truetype");
+    font-style: italic;
+    font-weight: 100 900;
 }
