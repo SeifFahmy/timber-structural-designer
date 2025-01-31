@@ -22,7 +22,13 @@ const Home = () => {
                     Import the loads on the timber structure from Robot using
                     the button below to get started.
                 </Text>
-                <Button onClick={handleRobotImport} variant="filled" color="teal">Import Robot Loads</Button>
+                <Button
+                    onClick={handleRobotImport}
+                    variant="filled"
+                    color="teal"
+                >
+                    Import Robot Loads
+                </Button>
                 {result && <Text>{result}</Text>}
             </Stack>
         </Center>

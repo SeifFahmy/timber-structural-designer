@@ -1,18 +1,22 @@
 body {
     font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
-    margin: auto;
-    max-width: 38rem;
-    padding: 2rem;
     height: 100vh;
+    max-height: 100vh;
+    overflow-y: none;
 
-    background-color: #fac898;
+    /* background-color: #fac898; */
+    background-color: white;
     background-image: url("/static/images/background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* background: linear-gradient(135deg, #ce9519, #e5c57c); */
-    /* background-image: linear-gradient(-60deg, #67b382 0%, #3d7b53 100%); */
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
 }
 
 button {
