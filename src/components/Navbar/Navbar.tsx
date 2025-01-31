@@ -1,37 +1,45 @@
 import { Button, Divider, Group } from "@mantine/core";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import { useState } from "react";
 
 const navbarData = [
     {
-        route: "/",
+        pageRoute: "/",
         pageName: "Import",
     },
     {
-        route: "/design",
+        pageRoute: "/design",
         pageName: "Design",
     },
     {
-        route: "/results",
+        pageRoute: "/results",
         pageName: "Results",
     },
     {
-        route: "/contact",
+        pageRoute: "/contact",
         pageName: "Contact",
     },
 ];
 
 const Navbar = () => {
+    const [appRoute, setAppRoute] = useState("/");
+    const handleClick = (pageRoute: string) => {
+        setAppRoute(pageRoute);
+    };
+
     return (
         <>
             <Group className={styles.navbar}>
-                {navbarData.map(({ route, pageName }, index) => (
+                {navbarData.map(({ pageRoute, pageName }, index) => (
                     <Link
-                        to={route}
+                        to={pageRoute}
                         key={index}
                         className={`${styles.navbarButton} ${
-                            index === 0 && styles.navbarButtonSelected
+                            appRoute === pageRoute &&
+                            styles.navbarButtonSelected
                         }`}
+                        onClick={() => handleClick(pageRoute)}
                     >
                         <Button variant="filled" color="teal">
                             {pageName}
