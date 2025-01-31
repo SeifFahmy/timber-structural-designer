@@ -13,6 +13,21 @@ body {
     background-repeat: no-repeat;
 }
 
+.mainContentContainer {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: var(--mantine-shadow-md);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--mantine-radius-md);
+    max-width: inherit;
+
+    color: white;
+    align-items: center;
+    padding: var(--mantine-spacing-md);
+}
+
 *,
 *::after,
 *::before {
