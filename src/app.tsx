@@ -1,23 +1,24 @@
 import "@mantine/charts/styles.layer.css";
 import "@mantine/core/styles.layer.css";
 
-import { Container, MantineProvider } from "@mantine/core";
+import { Container, MantineProvider, Stack } from "@mantine/core";
 import { createRoot } from "react-dom/client";
 import { HashRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./routes/home";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
     return (
         <MantineProvider>
-            <Container h="100%">
+            <Stack h="100vh" p="2rem" maw="38rem" gap={0} mx="auto">
                 <HashRouter>
-                    Navbar
+                    <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
                     </Routes>
                 </HashRouter>
-            </Container>
+            </Stack>
         </MantineProvider>
     );
 };

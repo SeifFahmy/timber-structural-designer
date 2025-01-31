@@ -1,0 +1,24 @@
+.navbar {
+    padding: 1rem 0;
+    justify-content: center;
+    --group-gap: var(--mantine-spacing-xl) !important;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: var(--mantine-shadow-md);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+}
+
+.navbarButton {
+    opacity: 0.2;
+    transition: opacity 0.2s ease;
+}
+
+.navbarButton:hover {
+    opacity: 1;
+}
+
+.navbarButtonSelected {
+    opacity: 1;
+}
