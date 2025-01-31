@@ -1,6 +1,6 @@
 {
   "name": "timber-structural-design",
-  "productName": "timber-structural-design",
+  "productName": "Timber Structural Designer",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
@@ -43,7 +43,7 @@
   },
   "keywords": [],
   "author": {
-    "name": "Seif (Cundall)",
+    "name": "Seif Fahmy",
     "email": "seifehab.bl4@gmail.com"
   },
   "license": "MIT",
