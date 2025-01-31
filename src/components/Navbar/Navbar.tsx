@@ -12,8 +12,8 @@ const navbarData = [
         pageName: "Design",
     },
     {
-        route: "/export",
-        pageName: "Export",
+        route: "/results",
+        pageName: "Results",
     },
     {
         route: "/contact",

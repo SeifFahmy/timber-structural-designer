@@ -1,6 +1,5 @@
 import { Button, Center, Stack, Text } from "@mantine/core";
 import { useState } from "react";
-import styles from "./Home.module.css";
 
 const Home = () => {
     const [result, setResult] = useState("");
@@ -17,7 +16,7 @@ const Home = () => {
 
     return (
         <Center h="100%">
-            <Stack className={styles.root}>
+            <Stack className="mainContentContainer">
                 <Text>
                     Import the loads on the timber structure from Robot using
                     the button below to get started.

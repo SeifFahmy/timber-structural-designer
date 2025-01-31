@@ -17,6 +17,7 @@ const createWindow = (): void => {
     const mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
+        title: "Timber Structural Designer",
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         },
@@ -54,12 +55,22 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
+ipcMain.handle("get-process-name", () => {
+    const name = path.basename(process.argv[0]);
+    return name.substring(0, name.length - 4);
+});
+
 ipcMain.handle("robot-import", async (event) => {
     return new Promise((resolve, reject) => {
         // Path to the compiled C# executable
         const isDevelopment = !app.isPackaged;
         const csharpExecutablePath = isDevelopment
-            ? path.join(app.getAppPath(), "static", "api", "RobotImportTimberModel.exe")
+            ? path.join(
+                  app.getAppPath(),
+                  "static",
+                  "api",
+                  "RobotImportTimberModel.exe"
+              )
             : path.join(
                   process.resourcesPath,
                   "static",
@@ -69,6 +80,53 @@ ipcMain.handle("robot-import", async (event) => {
 
         // Spawn the C# process
         const cSharpProcess = spawn(csharpExecutablePath);
+
+        let result = "";
+        let error = "";
+
+        // Capture the output
+        cSharpProcess.stdout.on("data", (data) => {
+            result += data.toString();
+        });
+
+        // Capture errors
+        cSharpProcess.stderr.on("data", (data) => {
+            error += data.toString();
+        });
+
+        cSharpProcess.on("close", (code) => {
+            if (code === 0 && !error) {
+                resolve(result.trim());
+            } else {
+                reject(error || "Unknown error occurred.");
+            }
+        });
+    });
+});
+
+ipcMain.handle("tedds-design", async (event, parentWindowName, robotData) => {
+    return new Promise((resolve, reject) => {
+        // Path to the compiled C# executable
+        const isDevelopment = !app.isPackaged;
+        const csharpExecutablePath = isDevelopment
+            ? path.join(
+                  app.getAppPath(),
+                  "static",
+                  "api",
+                  "TeddsTimberDesign.exe"
+              )
+            : path.join(
+                  process.resourcesPath,
+                  "static",
+                  "api",
+                  "TeddsTimberDesign.exe"
+              );
+
+        // Spawn the C# process
+        const cSharpProcess = spawn(csharpExecutablePath, [
+            parentWindowName,
+            robotData,
+        ]);
 
         let result = "";
         let error = "";
