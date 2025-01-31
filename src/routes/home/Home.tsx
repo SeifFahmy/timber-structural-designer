@@ -1,16 +1,19 @@
 import { Button, Center, Stack, Text } from "@mantine/core";
 import { useState } from "react";
+import { useRobotStore } from "../../hooks/useRobotStore";
 
 const Home = () => {
-    const [result, setResult] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("");
     const handleRobotImport = async () => {
         try {
             // Call the C# executable via Electron's main process
             const robotModel = await (window as any).api.robotImport();
-            setResult(`Result: ${robotModel}`);
+            useRobotStore((state) => state.updateRobotData(robotModel));
         } catch (error) {
-            setResult(`Error: ${error}`);
+            setErrorMessage(
+                `Something went wrong. Please make sure Robot is open and contains timber elements, then try again. 
+                If the problem persists, please contact me through the Contact page.`
+            );
         }
     };
 
@@ -28,7 +31,11 @@ const Home = () => {
                 >
                     Import Robot Loads
                 </Button>
-                {result && <Text>{result}</Text>}
+                {errorMessage && (
+                    <Text c="red" fw={700}>
+                        {errorMessage}
+                    </Text>
+                )}
             </Stack>
         </Center>
     );

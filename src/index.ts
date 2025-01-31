@@ -20,6 +20,8 @@ const createWindow = (): void => {
         title: "Timber Structural Designer",
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+            contextIsolation: true,
+            allowRunningInsecureContent: false,
         },
     });
 
@@ -30,7 +32,7 @@ const createWindow = (): void => {
     // mainWindow.webContents.openDevTools();
 
     // Remove the menu bar
-    Menu.setApplicationMenu(null);
+    // mainWindow.setMenuBarVisibility(false);
 };
 
 // This method will be called when Electron has finished
