@@ -1,7 +1,7 @@
-import { Center, Stack, Button, Text } from "@mantine/core";
+import { Button, Center, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useTeddsStore } from "../../hooks/useTeddsStore";
 
-// const parentWindowName = "Code";
 const robotData = [
     {
         id: 1,
@@ -24,7 +24,7 @@ const robotData = [
 ];
 
 const Design = () => {
-    const [result, setResult] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [parentWindowName, setWindowName] = useState("");
 
     useEffect(() => {
@@ -41,12 +41,13 @@ const Design = () => {
                 parentWindowName,
                 JSON.stringify(robotData)
             );
-            setResult(`Result: ${teddsDesign}`);
+            useTeddsStore((state) => state.updateTeddsData(teddsDesign));
         } catch (error) {
-            setResult(`Error: ${error}`);
+            setErrorMessage(
+                `Something went wrong. Please make sure Robot is open and contains timber elements, then try again. 
+                If the problem persists, please contact me through the Contact page.`
+            );
         }
-        // console.log(JSON.stringify(robotData));
-        // console.log(parentWindowName);
     };
     return (
         <Center h="100%">
@@ -62,7 +63,11 @@ const Design = () => {
                 >
                     Design Structure
                 </Button>
-                {result && <Text>{result}</Text>}
+                {errorMessage && (
+                    <Text c="red" fw={700}>
+                        {errorMessage}
+                    </Text>
+                )}
             </Stack>
         </Center>
     );

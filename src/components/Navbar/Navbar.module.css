@@ -1,5 +1,14 @@
+.navbarContainer {
+    --navbarWidth: 38rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
 .navbar {
     padding: 1rem 0;
+    max-width: var(--navbarWidth);
+    width: var(--navbarWidth);
     justify-content: center;
     --group-gap: var(--mantine-spacing-xl) !important;
     background-color: rgba(255, 255, 255, 0.3);
