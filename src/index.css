@@ -21,7 +21,7 @@ body {
 
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: var(--mantine-radius-md);
-    max-width: inherit;
+    max-width: 45rem;
 
     color: white;
     align-items: center;

@@ -1,5 +1,5 @@
 import { Button, Divider, Group } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useState } from "react";
 
@@ -23,13 +23,14 @@ const navbarData = [
 ];
 
 const Navbar = () => {
-    const [appRoute, setAppRoute] = useState("/");
+    const currentRoute = useLocation();
+    const [appRoute, setAppRoute] = useState(currentRoute.pathname);
     const handleClick = (pageRoute: string) => {
         setAppRoute(pageRoute);
     };
 
     return (
-        <>
+        <div className={styles.navbarContainer}>
             <Group className={styles.navbar}>
                 {navbarData.map(({ pageRoute, pageName }, index) => (
                     <Link
@@ -41,14 +42,14 @@ const Navbar = () => {
                         }`}
                         onClick={() => handleClick(pageRoute)}
                     >
-                        <Button variant="filled" color="teal">
+                        <Button variant="filled" color="teal" size="md">
                             {pageName}
                         </Button>
                     </Link>
                 ))}
             </Group>
-            <Divider />
-        </>
+            <Divider maw="var(--navbarWidth)" w="var(--navbarWidth)" />
+        </div>
     );
 };
 
