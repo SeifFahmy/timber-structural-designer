@@ -32,7 +32,7 @@ const createWindow = (): void => {
     // mainWindow.webContents.openDevTools();
 
     // Remove the menu bar
-    // mainWindow.setMenuBarVisibility(false);
+    mainWindow.setMenuBarVisibility(false);
 };
 
 // This method will be called when Electron has finished

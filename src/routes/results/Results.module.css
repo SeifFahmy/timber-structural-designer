@@ -1,0 +1,11 @@
+.verticalDivider {
+    background-color: white;
+    width: 1px;
+    height: 5rem;
+    opacity: 0.6;
+}
+
+.tableHeader {
+    color: var(--mantine-color-teal-8);
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+}
