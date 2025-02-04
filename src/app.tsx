@@ -9,6 +9,7 @@ import Home from "./routes/home";
 import Navbar from "./components/Navbar/Navbar";
 import Design from "./routes/design";
 import Results from "./routes/results";
+import Contact from "./routes/contact";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/design" element={<Design />} />
                         <Route path="/results" element={<Results />} />
+                        <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </HashRouter>
             </Stack>
