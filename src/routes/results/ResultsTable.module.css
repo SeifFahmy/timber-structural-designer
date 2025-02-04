@@ -1,0 +1,13 @@
+.tableHeader {
+    color: var(--mantine-color-teal-8);
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+}
+
+.tableRow {
+    cursor: pointer;
+    transition: background-color ease 0.2s;
+}
+
+.tableRow:hover {
+    background-color: rgba(18, 184, 134, 0.4);
+}
