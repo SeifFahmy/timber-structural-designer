@@ -7,4 +7,6 @@ contextBridge.exposeInMainWorld("api", {
     robotImport: () => ipcRenderer.invoke("robot-import"),
     teddsDesign: (parentWindowName: string, robotData: string) =>
         ipcRenderer.invoke("tedds-design", parentWindowName, robotData),
+    robotUpdate: (sectionData: string) =>
+        ipcRenderer.invoke("robot-update", sectionData),
 });

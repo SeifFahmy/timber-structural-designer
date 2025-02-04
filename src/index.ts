@@ -155,3 +155,47 @@ ipcMain.handle("tedds-design", async (event, parentWindowName, robotData) => {
         });
     });
 });
+
+ipcMain.handle("robot-update", async (event, sectionData) => {
+    return new Promise((resolve, reject) => {
+        // Path to the compiled C# executable
+        const isDevelopment = !app.isPackaged;
+        const csharpExecutablePath = isDevelopment
+            ? path.join(
+                  app.getAppPath(),
+                  "static",
+                  "api",
+                  "RobotUpdateTimberSections.exe"
+              )
+            : path.join(
+                  process.resourcesPath,
+                  "static",
+                  "api",
+                  "RobotUpdateTimberSections.exe"
+              );
+
+        // Spawn the C# process
+        const cSharpProcess = spawn(csharpExecutablePath, [sectionData]);
+
+        let result = "";
+        let error = "";
+
+        // Capture the output
+        cSharpProcess.stdout.on("data", (data) => {
+            result += data.toString();
+        });
+
+        // Capture errors
+        cSharpProcess.stderr.on("data", (data) => {
+            error += data.toString();
+        });
+
+        cSharpProcess.on("close", (code) => {
+            if (code === 0 && !error) {
+                resolve(result.trim());
+            } else {
+                reject(error || "Unknown error occurred.");
+            }
+        });
+    });
+});
