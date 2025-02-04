@@ -1,17 +1,15 @@
 import {
-    Center,
-    Stack,
     Button,
+    Center,
+    Group,
+    Paper,
+    SimpleGrid,
+    Stack,
     Text,
     Title,
-    Group,
-    SimpleGrid,
-    Paper,
-    Table,
 } from "@mantine/core";
+import { useState } from "react";
 import styles from "./Results.module.css";
-import { TeddsData } from "../../hooks/useTeddsStore";
-import { useDisclosure } from "@mantine/hooks";
 import ResultsTable from "./ResultsTable";
 
 const overviewData = [
@@ -21,9 +19,24 @@ const overviewData = [
     { title: "Max section", content: "360x1000" },
 ];
 
+const sectionData = {
+    "200x1000": [1, 2, 3, 4, 5],
+};
+
 const Results = () => {
-    const handleRobotUpdate = () => {
-        console.log("updated robot");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleRobotUpdate = async () => {
+        try {
+            // Call the C# executable via Electron's main process
+            // const sectionData = useSectionStore((state) => state.sectionData);
+            await (window as any).api.robotUpdate(JSON.stringify(sectionData));
+        } catch (error) {
+            setErrorMessage(
+                `Something went wrong. Please make sure Robot is open and element IDs have not been changed, then try again. 
+                If the problem persists, please contact me through the Contact page.`
+            );
+        }
     };
 
     return (
@@ -68,6 +81,11 @@ const Results = () => {
                             Update Robot
                         </Button>
                     </Group>
+                    {errorMessage && (
+                        <Text c="red" fw={700}>
+                            {errorMessage}
+                        </Text>
+                    )}
                 </Stack>
                 <Stack w="100%" gap="0.5rem">
                     <Title order={2}>Breakdown</Title>
@@ -84,3 +102,6 @@ const Results = () => {
 };
 
 export default Results;
+function useSectionStore(arg0: (state: any) => any) {
+    throw new Error("Function not implemented.");
+}
