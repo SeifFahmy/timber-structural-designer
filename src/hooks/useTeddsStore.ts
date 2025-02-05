@@ -2,9 +2,8 @@ import { create } from "zustand";
 
 export interface TeddsData {
     id: number;
-    width: number;
-    depth: number;
-    result: number;
+    section: string;
+    result: string;
     designMessage: string;
     util: number;
     material: string;
