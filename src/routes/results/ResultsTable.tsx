@@ -12,7 +12,6 @@ import {
 } from "@mantine/core";
 import { TeddsData, useTeddsStore } from "../../hooks/useTeddsStore";
 import styles from "./ResultsTable.module.css";
-import RtfRenderer from "./RtfRenderer";
 
 const ResultsTable = ({ memberResults }: { memberResults: TeddsData[] }) => {
     const TableRow = ({ member }: { member: TeddsData }) => {
@@ -90,7 +89,6 @@ const ResultsTable = ({ memberResults }: { memberResults: TeddsData[] }) => {
                         dangerouslySetInnerHTML={{ __html: member.outputHtml }}
                         style={{ color: "black" }}
                     />
-                    {/* <RtfRenderer memberData={member.outputHtml} /> */}
                 </Modal>
 
                 <Table.Tr onClick={open} className={styles.tableRow}>
