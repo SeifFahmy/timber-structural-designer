@@ -11,6 +11,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    --teal-background: rgba(18, 184, 134, 0.4);
 }
 
 .mainContentContainer {

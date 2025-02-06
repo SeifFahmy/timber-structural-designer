@@ -3,11 +3,34 @@
     border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
 }
 
+.tableHeader > th {
+    text-align: center;
+}
+
 .tableRow {
     cursor: pointer;
     transition: background-color ease 0.2s;
 }
 
 .tableRow:hover {
-    background-color: rgba(18, 184, 134, 0.4);
+    background-color: var(--teal-background);
+}
+
+.modal {
+    background-color: var(--mantine-color-gray-2);
+    color: var(--mantine-color-teal-8);
+    padding: var(--mantine-spacing-md);
+    overflow: hidden;
+}
+
+.modalHeader > h2 {
+    font-size: var(--mantine-font-size-lg);
+    font-weight: bold;
+}
+
+.verticalDivider {
+    background-color: var(--mantine-color-teal-8);
+    width: 1px;
+    height: 3rem;
+    opacity: 0.6;
 }

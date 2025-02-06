@@ -1,43 +1,41 @@
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button, ScrollArea, Text, Table } from "@mantine/core";
-import { TeddsData } from "../../hooks/useTeddsStore";
+import {
+    Modal,
+    Button,
+    ScrollArea,
+    Text,
+    Table,
+    Group,
+    FocusTrap,
+    Paper,
+    SimpleGrid,
+} from "@mantine/core";
+import { TeddsData, useTeddsStore } from "../../hooks/useTeddsStore";
 import styles from "./ResultsTable.module.css";
-
-// id: number;
-// width: number;
-// depth: number;
-// result: number;
-// designMessage: string;
-// util: number;
-// material: string;
-// strength: string;
-// outputRtf: string;
-
-const members = [
-    { id: 1, section: 12.011, result: "C", util: "Carbon" },
-    { id: 2, section: 14.007, result: "N", util: "Nitrogen" },
-    { id: 3, section: 88.906, result: "Y", util: "Yttrium" },
-    { id: 4, section: 137.33, result: "Ba", util: "Barium" },
-    { id: 5, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 6, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 7, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 8, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 9, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 10, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 11, section: 140.12, result: "Ce", util: "Cerium" },
-    { id: 12, section: 140.12, result: "Ce", util: "Cerium" },
-];
+import { membersData } from "./data";
+import RtfRenderer from "./RtfRenderer";
 
 const ResultsTable = () => {
-    const TableRow = ({ member }: { member: any }) => {
+    // const members = useTeddsStore((state) => state.teddsData);
+    // console.log(members[0]);
+
+    const members = membersData;
+
+    const TableRow = ({ member }: { member: TeddsData }) => {
         const [opened, { open, close }] = useDisclosure(false);
+        const memberData = [
+            { title: "Utilisation", content: member.util },
+            { title: "Design status", content: member.result },
+            { title: "Material", content: member.material },
+            { title: "Section", content: member.section },
+        ];
+
         return (
             <>
                 <Modal
-                    key={member.id + 10000}
                     opened={opened}
                     onClose={close}
-                    title={`Breakdown of Member ${member.id}`}
+                    title={`Member ${member.id} Design Details`}
                     centered
                     size="lg"
                     scrollAreaComponent={ScrollArea.Autosize}
@@ -45,15 +43,63 @@ const ResultsTable = () => {
                         backgroundOpacity: 0.4,
                         blur: 4,
                     }}
+                    classNames={{
+                        content: styles.modal,
+                        header: `${styles.modal} ${styles.modalHeader}`,
+                    }}
+                    styles={{ close: { color: "var(--mantine-color-teal-8)" } }}
                 >
-                    <Text>{member.id}</Text>
+                    <FocusTrap.InitialFocus />
+                    <Group
+                        gap="2rem"
+                        wrap="nowrap"
+                        justify="flex-start"
+                        pb="1rem"
+                    >
+                        <Text flex="1 1 0" ta="justify">
+                            The Tedds calc carried out on this member is
+                            presented below.
+                        </Text>
+                        <div className={styles.verticalDivider} />
+                        <Button
+                            onClick={() => console.log("saved pdf")}
+                            variant="filled"
+                            color="teal"
+                            style={{
+                                alignSelf: "center",
+                            }}
+                        >
+                            Save as PDF
+                        </Button>
+                    </Group>
+                    <Paper
+                        mb="1.5rem"
+                        p="md"
+                        shadow="md"
+                        bg="var(--teal-background)"
+                        flex="1 1 0"
+                    >
+                        <SimpleGrid cols={2} spacing="xs">
+                            {memberData.map((entry, index) => (
+                                <Text key={index} size="md" p={0} ta="center">
+                                    <Text span fw={600}>
+                                        {entry.title}:
+                                    </Text>
+                                    <Text span fs="italic">
+                                        {" " + entry.content}
+                                    </Text>
+                                </Text>
+                            ))}
+                        </SimpleGrid>
+                    </Paper>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: member.outputHtml }}
+                        style={{ color: "black" }}
+                    />
+                    {/* <RtfRenderer memberData={member.outputHtml} /> */}
                 </Modal>
 
-                <Table.Tr
-                    key={member.id}
-                    onClick={open}
-                    className={styles.tableRow}
-                >
+                <Table.Tr onClick={open} className={styles.tableRow}>
                     <Table.Td>{member.id}</Table.Td>
                     <Table.Td>{member.section}</Table.Td>
                     <Table.Td>{member.result}</Table.Td>
@@ -66,7 +112,7 @@ const ResultsTable = () => {
     return (
         <>
             <Table.ScrollContainer minWidth={500} h="13rem">
-                <Table stickyHeader>
+                <Table stickyHeader ta="center">
                     <Table.Thead bg="var(--mantine-color-gray-2)">
                         <Table.Tr className={styles.tableHeader}>
                             <Table.Th
@@ -91,7 +137,7 @@ const ResultsTable = () => {
                     </Table.Thead>
                     <Table.Tbody>
                         {members.map((member) => (
-                            <TableRow member={member} />
+                            <TableRow key={member.id} member={member} />
                         ))}
                     </Table.Tbody>
                 </Table>
