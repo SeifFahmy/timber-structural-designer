@@ -37,7 +37,6 @@ const Home = () => {
             // Call the C# executable via Electron's main process
             const robotModel = await (window as any).api.robotImport(caseIds);
             const robotModelJson = JSON.parse(robotModel);
-            console.log(robotModelJson);
             updateRobotData(robotModelJson);
         } catch (error) {
             setErrorMessage(
@@ -59,7 +58,7 @@ const Home = () => {
                     you want to deisgn for, or just write "all" if you want to
                     consider all cases.
                 </Text>
-                <Form form={form} onSubmit={handleRobotImport}>
+                <form onSubmit={form.onSubmit(() => handleRobotImport())}>
                     <TextInput
                         withAsterisk
                         label="Robot case IDs"
@@ -77,7 +76,7 @@ const Home = () => {
                     >
                         Import Robot Loads
                     </Button>
-                </Form>
+                </form>
                 {errorMessage && (
                     <Text c="red" fw={700}>
                         {errorMessage}
