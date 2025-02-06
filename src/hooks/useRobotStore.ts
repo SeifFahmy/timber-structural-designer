@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
 interface RobotData {
-    id: number;
-    momentMajor: number;
-    momentMinor: number;
-    shearMajor: number;
-    shearMinor: number;
-    axial: number;
-    length: number;
+    Id: number;
+    MomentMajor: number;
+    MomentMinor: number;
+    ShearMajor: number;
+    ShearMinor: number;
+    Axial: number;
+    IsAxialMember: boolean;
 }
 
 interface RobotState {
