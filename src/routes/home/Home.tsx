@@ -2,11 +2,17 @@ import { Button, Center, Stack, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { useRobotStore } from "../../hooks/useRobotStore";
 import { Form, useForm } from "@mantine/form";
+import { useNavbarStore } from "../../hooks/useNavbarStore";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const updateRobotData = useRobotStore((state) => state.updateRobotData);
+    const updateLatestRoute = useNavbarStore(
+        (state) => state.updateLatestRoute
+    );
+    const navigate = useNavigate();
 
     const form = useForm({
         mode: "uncontrolled",
@@ -40,6 +46,8 @@ const Home = () => {
             );
         }
         setButtonDisabled(false);
+        updateLatestRoute(2);
+        navigate("/design");
     };
 
     return (
