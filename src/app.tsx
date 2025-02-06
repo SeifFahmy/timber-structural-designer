@@ -1,5 +1,6 @@
 import "@mantine/charts/styles.layer.css";
 import "@mantine/core/styles.layer.css";
+import '@mantine/tiptap/styles.css';
 
 import { Container, MantineProvider, Stack } from "@mantine/core";
 import { createRoot } from "react-dom/client";

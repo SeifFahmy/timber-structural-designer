@@ -53,7 +53,7 @@ const Results = () => {
                         <Paper
                             p="md"
                             shadow="lg"
-                            bg="rgba(18, 184, 134, 0.4)"
+                            bg="var(--teal-background)"
                             flex="1 1 0"
                         >
                             <SimpleGrid cols={2} spacing="xs">

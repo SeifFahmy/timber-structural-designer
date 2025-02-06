@@ -8,7 +8,7 @@ export interface TeddsData {
     util: number;
     material: string;
     strength: string;
-    outputRtf: string;
+    outputHtml: string;
 }
 
 interface TeddsState {
