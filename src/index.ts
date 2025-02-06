@@ -65,7 +65,7 @@ ipcMain.handle("get-process-name", () => {
     return name.substring(0, name.length - 4);
 });
 
-ipcMain.handle("robot-import", async (event) => {
+ipcMain.handle("robot-import", async (event, caseIds) => {
     return new Promise((resolve, reject) => {
         // Path to the compiled C# executable
         const isDevelopment = !app.isPackaged;
@@ -84,7 +84,7 @@ ipcMain.handle("robot-import", async (event) => {
               );
 
         // Spawn the C# process
-        const cSharpProcess = spawn(csharpExecutablePath);
+        const cSharpProcess = spawn(csharpExecutablePath, [caseIds]);
 
         let result = "";
         let error = "";
