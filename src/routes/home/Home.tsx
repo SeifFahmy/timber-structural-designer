@@ -30,7 +30,9 @@ const Home = () => {
         try {
             // Call the C# executable via Electron's main process
             const robotModel = await (window as any).api.robotImport(caseIds);
-            updateRobotData(robotModel);
+            const robotModelJson = JSON.parse(robotModel);
+            console.log(robotModelJson);
+            updateRobotData(robotModelJson);
         } catch (error) {
             setErrorMessage(
                 `Something went wrong. Please make sure Robot is open and contains timber elements, then try again.

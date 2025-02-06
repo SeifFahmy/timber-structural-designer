@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface RobotData {
+export interface RobotData {
     Id: number;
     MomentMajor: number;
     MomentMinor: number;
