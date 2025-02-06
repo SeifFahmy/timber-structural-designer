@@ -1,48 +1,53 @@
 import { Button, Divider, Group } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
+import { useNavbarStore } from "../../hooks/useNavbarStore";
 import styles from "./Navbar.module.css";
-import { useState } from "react";
 
 const navbarData = [
     {
+        number: 1,
         pageRoute: "/",
         pageName: "Import",
     },
     {
+        number: 2,
         pageRoute: "/design",
         pageName: "Design",
     },
     {
+        number: 3,
         pageRoute: "/results",
         pageName: "Results",
     },
     {
+        number: 0,
         pageRoute: "/contact",
         pageName: "Contact",
     },
 ];
 
 const Navbar = () => {
-    const currentRoute = useLocation();
-    const [appRoute, setAppRoute] = useState(currentRoute.pathname);
-    const handleClick = (pageRoute: string) => {
-        setAppRoute(pageRoute);
-    };
+    const currentRoute = useLocation().pathname;
+    const latestRouteNumber = useNavbarStore((state) => state.latestRoute);
 
     return (
         <div className={styles.navbarContainer}>
             <Group className={styles.navbar}>
-                {navbarData.map(({ pageRoute, pageName }, index) => (
+                {navbarData.map(({ number, pageRoute, pageName }, index) => (
                     <Link
                         to={pageRoute}
                         key={index}
                         className={`${styles.navbarButton} ${
-                            appRoute === pageRoute &&
+                            currentRoute === pageRoute &&
                             styles.navbarButtonSelected
                         }`}
-                        onClick={() => handleClick(pageRoute)}
                     >
-                        <Button variant="filled" color="teal" size="md">
+                        <Button
+                            variant="filled"
+                            color="teal"
+                            size="md"
+                            disabled={number > latestRouteNumber}
+                        >
                             {pageName}
                         </Button>
                     </Link>

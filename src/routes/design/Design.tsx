@@ -2,75 +2,8 @@ import { Button, Center, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useTeddsStore } from "../../hooks/useTeddsStore";
 import { useRobotStore } from "../../hooks/useRobotStore";
-
-// const robotData = [
-//     {
-//         id: 1,
-//         momentMajor: 45,
-//         momentMinor: 0,
-//         shearMajor: 123,
-//         shearMinor: 123,
-//         axial: 0,
-//         length: 3,
-//     },
-//     {
-//         id: 2,
-//         momentMajor: 60,
-//         momentMinor: 0,
-//         shearMajor: 150,
-//         shearMinor: 150,
-//         axial: 150,
-//         IsAxialMember: false,
-//     },
-// ];
-
-// [
-//     {
-//         "Id": 1,
-//         "MomentMajor": -0.56,
-//         "MomentMinor": -0.37,
-//         "ShearMajor": 0.15,
-//         "ShearMinor": 0.08,
-//         "Axial": 10.24,
-//         "IsAxialMember": false
-//     },
-//     {
-//         "Id": 2,
-//         "MomentMajor": -0.35,
-//         "MomentMinor": -0.19,
-//         "ShearMajor": 0.12,
-//         "ShearMinor": 0.04,
-//         "Axial": 210.01,
-//         "IsAxialMember": false
-//     },
-//     {
-//         "Id": 3,
-//         "MomentMajor": 0.57,
-//         "MomentMinor": 0.5,
-//         "ShearMajor": 0.15,
-//         "ShearMinor": 0.14,
-//         "Axial": 7.57,
-//         "IsAxialMember": false
-//     },
-//     {
-//         "Id": 4,
-//         "MomentMajor": 0.36,
-//         "MomentMinor": -0.36,
-//         "ShearMajor": 0.12,
-//         "ShearMinor": 0.11,
-//         "Axial": 207.41,
-//         "IsAxialMember": false
-//     },
-//     {
-//         "Id": 5,
-//         "MomentMajor": 3.8,
-//         "MomentMinor": -0.04,
-//         "ShearMajor": 3.26,
-//         "ShearMinor": 0.02,
-//         "Axial": 0.06,
-//         "IsAxialMember": false
-//     }
-// ]
+import { useNavbarStore } from "../../hooks/useNavbarStore";
+import { useNavigate } from "react-router-dom";
 
 const Design = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -78,6 +11,10 @@ const Design = () => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const updateTeddsData = useTeddsStore((state) => state.updateTeddsData);
     const robotData = useRobotStore((state) => state.robotData);
+    const updateLatestRoute = useNavbarStore(
+        (state) => state.updateLatestRoute
+    );
+    const navigate = useNavigate();
 
     const numMembers = robotData.length;
     let totalTimeEstimate = "";
@@ -114,6 +51,8 @@ const Design = () => {
             );
         }
         setButtonDisabled(false);
+        updateLatestRoute(3);
+        navigate("/results");
     };
 
     return (
