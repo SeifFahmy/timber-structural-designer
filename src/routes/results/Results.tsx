@@ -11,26 +11,19 @@ import {
 import { useState } from "react";
 import styles from "./Results.module.css";
 import ResultsTable from "./ResultsTable";
-
-const overviewData = [
-    { title: "Max utilisation", content: 0.8 },
-    { title: "Design status", content: "PASS" },
-    { title: "Material", content: "Glulam" },
-    { title: "Max section", content: "360x1000" },
-];
-
-const sectionData = {
-    "200x1000": [1, 2, 3, 4, 5],
-};
+import useAnalyseResults from "../../hooks/useAnalyseResults";
+import { useTeddsStore } from "../../hooks/useTeddsStore";
 
 const Results = () => {
     const [errorMessage, setErrorMessage] = useState("");
+    const memberResults = useTeddsStore((state) => state.teddsData);
+    const { overview, barSections } = useAnalyseResults(memberResults);
 
     const handleRobotUpdate = async () => {
         try {
             // Call the C# executable via Electron's main process
             // const sectionData = useSectionStore((state) => state.sectionData);
-            await (window as any).api.robotUpdate(JSON.stringify(sectionData));
+            await (window as any).api.robotUpdate(JSON.stringify(barSections));
         } catch (error) {
             setErrorMessage(
                 `Something went wrong. Please make sure Robot is open and element IDs have not been changed, then try again. 
@@ -57,8 +50,13 @@ const Results = () => {
                             flex="1 1 0"
                         >
                             <SimpleGrid cols={2} spacing="xs">
-                                {overviewData.map((entry, index) => (
-                                    <Text key={index} size="md" p={0}>
+                                {overview.map((entry, index) => (
+                                    <Text
+                                        key={index}
+                                        size="md"
+                                        p={0}
+                                        ta="center"
+                                    >
                                         <Text span fw={600}>
                                             {entry.title}:
                                         </Text>
@@ -94,7 +92,7 @@ const Results = () => {
                         given below. Click on a member to inspect its results in
                         more detail.
                     </Text>
-                    <ResultsTable />
+                    <ResultsTable memberResults={memberResults} />
                 </Stack>
             </Stack>
         </Center>
@@ -102,6 +100,3 @@ const Results = () => {
 };
 
 export default Results;
-function useSectionStore(arg0: (state: any) => any) {
-    throw new Error("Function not implemented.");
-}

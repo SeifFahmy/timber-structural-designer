@@ -12,15 +12,9 @@ import {
 } from "@mantine/core";
 import { TeddsData, useTeddsStore } from "../../hooks/useTeddsStore";
 import styles from "./ResultsTable.module.css";
-import { membersData } from "./data";
 import RtfRenderer from "./RtfRenderer";
 
-const ResultsTable = () => {
-    // const members = useTeddsStore((state) => state.teddsData);
-    // console.log(members[0]);
-
-    const members = membersData;
-
+const ResultsTable = ({ memberResults }: { memberResults: TeddsData[] }) => {
     const TableRow = ({ member }: { member: TeddsData }) => {
         const [opened, { open, close }] = useDisclosure(false);
         const memberData = [
@@ -136,7 +130,7 @@ const ResultsTable = () => {
                         </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody>
-                        {members.map((member) => (
+                        {memberResults.map((member) => (
                             <TableRow key={member.id} member={member} />
                         ))}
                     </Table.Tbody>
