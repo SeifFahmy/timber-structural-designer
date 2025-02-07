@@ -24,9 +24,9 @@ const createWindow = (): void => {
             allowRunningInsecureContent: false,
         },
     });
+    mainWindow.maximize();
 
     // and load the index.html of the app.
-    mainWindow.maximize();
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
     // Open the DevTools.
