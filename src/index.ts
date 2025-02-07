@@ -26,6 +26,7 @@ const createWindow = (): void => {
     });
 
     // and load the index.html of the app.
+    mainWindow.maximize();
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
     // Open the DevTools.
@@ -78,7 +79,6 @@ ipcMain.handle("robot-import", async (event, caseIds) => {
               )
             : path.join(
                   process.resourcesPath,
-                  "static",
                   "api",
                   "RobotImportTimberModel.exe"
               );
@@ -120,12 +120,7 @@ ipcMain.handle("tedds-design", async (event, parentWindowName, robotData) => {
                   "api",
                   "TeddsTimberDesign.exe"
               )
-            : path.join(
-                  process.resourcesPath,
-                  "static",
-                  "api",
-                  "TeddsTimberDesign.exe"
-              );
+            : path.join(process.resourcesPath, "api", "TeddsTimberDesign.exe");
 
         // Spawn the C# process
         const cSharpProcess = spawn(csharpExecutablePath, [
@@ -169,7 +164,6 @@ ipcMain.handle("robot-update", async (event, sectionData) => {
               )
             : path.join(
                   process.resourcesPath,
-                  "static",
                   "api",
                   "RobotUpdateTimberSections.exe"
               );
