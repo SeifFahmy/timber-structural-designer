@@ -15,11 +15,13 @@ import useAnalyseResults from "../../hooks/useAnalyseResults";
 import { useTeddsStore } from "../../hooks/useTeddsStore";
 
 const Results = () => {
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const memberResults = useTeddsStore((state) => state.teddsData);
     const { overview, barSections } = useAnalyseResults(memberResults);
 
     const handleRobotUpdate = async () => {
+        setButtonDisabled(true);
         try {
             // Call the C# executable via Electron's main process
             // const sectionData = useSectionStore((state) => state.sectionData);
@@ -30,6 +32,7 @@ const Results = () => {
                 If the problem persists, please contact me through the Contact page.`
             );
         }
+        setButtonDisabled(false);
     };
 
     return (
@@ -69,6 +72,7 @@ const Results = () => {
                         </Paper>
                         <div className={styles.verticalDivider} />
                         <Button
+                            disabled={buttonDisabled}
                             onClick={handleRobotUpdate}
                             variant="filled"
                             color="teal"
