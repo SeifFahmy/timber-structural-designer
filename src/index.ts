@@ -18,6 +18,7 @@ const createWindow = (): void => {
         height: 600,
         width: 800,
         title: "Timber Structural Designer",
+        icon:"static/icons/favicon.ico",
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
             contextIsolation: true,
