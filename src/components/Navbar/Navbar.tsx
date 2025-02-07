@@ -2,6 +2,7 @@ import { Button, Divider, Group } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
 import { useNavbarStore } from "../../hooks/useNavbarStore";
 import styles from "./Navbar.module.css";
+import logo from "../../../static/images/logo.png";
 
 const navbarData = [
     {
@@ -33,6 +34,20 @@ const Navbar = () => {
     return (
         <div className={styles.navbarContainer}>
             <Group className={styles.navbar}>
+                {/* <img
+                    src={logo}
+                    style={{
+                        height: "5rem",
+                        width: "5rem",
+                        objectFit: "cover",
+                        margin:"0.4rem 0"
+                    }}
+                /> */}
+                {/* <img
+                    src="/static/images/timber-structural-designer-icon.png"
+                    height="2rem"
+                    width="2rem"
+                /> */}
                 {navbarData.map(({ number, pageRoute, pageName }, index) => (
                     <Link
                         to={pageRoute}

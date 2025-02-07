@@ -19,6 +19,7 @@ const config: ForgeConfig = {
         extraResource: ["static/api"],
         name: "Timber Structural Designer",
         executableName: "TimberStructuralDesigner",
+        icon: "static/icons",
     },
     rebuildConfig: {},
     makers: [
