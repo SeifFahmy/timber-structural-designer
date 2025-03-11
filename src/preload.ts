@@ -6,8 +6,17 @@ contextBridge.exposeInMainWorld("api", {
     getProcessName: () => ipcRenderer.invoke("get-process-name"),
     robotImport: (ulsCaseIds: string, slsCaseIds: string) =>
         ipcRenderer.invoke("robot-import", ulsCaseIds, slsCaseIds),
-    teddsDesign: (parentWindowName: string, robotData: string) =>
-        ipcRenderer.invoke("tedds-design", parentWindowName, robotData),
+    teddsDesign: (
+        parentWindowName: string,
+        robotData: string,
+        deflectionLimit: string
+    ) =>
+        ipcRenderer.invoke(
+            "tedds-design",
+            parentWindowName,
+            robotData,
+            deflectionLimit
+        ),
     robotUpdate: (sectionData: string) =>
         ipcRenderer.invoke("robot-update", sectionData),
 });

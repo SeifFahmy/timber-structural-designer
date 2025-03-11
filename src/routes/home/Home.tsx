@@ -1,10 +1,10 @@
 import { Button, Center, Group, Stack, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 import { useRobotStore } from "../../hooks/useRobotStore";
-import { Form, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
 import { useNavbarStore } from "../../hooks/useNavbarStore";
 import { useNavigate } from "react-router-dom";
-import { NAVBARINDICES } from "../../components/Navbar/Navbar";
+import { NAVBAR_ROUTES } from "../../components/Navbar/Navbar";
 
 const Home = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -46,7 +46,7 @@ const Home = () => {
             );
             const robotModelJson = JSON.parse(robotModel);
             updateRobotData(robotModelJson);
-            updateLatestRoute(NAVBARINDICES.DESIGN);
+            updateLatestRoute(NAVBAR_ROUTES.DESIGN);
             navigate("/design");
         } catch (error) {
             setErrorMessage(

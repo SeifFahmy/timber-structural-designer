@@ -113,47 +113,55 @@ ipcMain.handle("robot-import", async (event, ulsCaseIds, slsCaseIds) => {
     });
 });
 
-ipcMain.handle("tedds-design", async (event, parentWindowName, robotData) => {
-    return new Promise((resolve, reject) => {
-        // Path to the compiled C# executable
-        const isDevelopment = !app.isPackaged;
-        const csharpExecutablePath = isDevelopment
-            ? path.join(
-                  app.getAppPath(),
-                  "static",
-                  "api",
-                  "TeddsTimberDesign.exe"
-              )
-            : path.join(process.resourcesPath, "api", "TeddsTimberDesign.exe");
+ipcMain.handle(
+    "tedds-design",
+    async (event, parentWindowName, robotData, deflectionLimit) => {
+        return new Promise((resolve, reject) => {
+            // Path to the compiled C# executable
+            const isDevelopment = !app.isPackaged;
+            const csharpExecutablePath = isDevelopment
+                ? path.join(
+                      app.getAppPath(),
+                      "static",
+                      "api",
+                      "TeddsTimberDesign.exe"
+                  )
+                : path.join(
+                      process.resourcesPath,
+                      "api",
+                      "TeddsTimberDesign.exe"
+                  );
 
-        // Spawn the C# process
-        const cSharpProcess = spawn(csharpExecutablePath, [
-            parentWindowName,
-            robotData,
-        ]);
+            // Spawn the C# process
+            const cSharpProcess = spawn(csharpExecutablePath, [
+                parentWindowName,
+                robotData,
+                deflectionLimit,
+            ]);
 
-        let result = "";
-        let error = "";
+            let result = "";
+            let error = "";
 
-        // Capture the output
-        cSharpProcess.stdout.on("data", (data) => {
-            result += data.toString();
+            // Capture the output
+            cSharpProcess.stdout.on("data", (data) => {
+                result += data.toString();
+            });
+
+            // Capture errors
+            cSharpProcess.stderr.on("data", (data) => {
+                error += data.toString();
+            });
+
+            cSharpProcess.on("close", (code) => {
+                if (code === 0 && !error) {
+                    resolve(result.trim());
+                } else {
+                    reject(error || "Unknown error occurred.");
+                }
+            });
         });
-
-        // Capture errors
-        cSharpProcess.stderr.on("data", (data) => {
-            error += data.toString();
-        });
-
-        cSharpProcess.on("close", (code) => {
-            if (code === 0 && !error) {
-                resolve(result.trim());
-            } else {
-                reject(error || "Unknown error occurred.");
-            }
-        });
-    });
-});
+    }
+);
 
 ipcMain.handle("robot-update", async (event, sectionData) => {
     return new Promise((resolve, reject) => {

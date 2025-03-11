@@ -12,6 +12,8 @@ export interface RobotData {
     Area: number;
     SecondMomentOfArea: number;
     Length: number;
+    MaterialE: number;
+    MaterialG: number;
 }
 
 interface RobotState {
