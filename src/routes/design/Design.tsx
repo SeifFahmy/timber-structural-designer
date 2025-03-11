@@ -58,7 +58,7 @@ const Design = () => {
             const teddsDesign = await (window as any).api.teddsDesign(
                 parentWindowName,
                 JSON.stringify(robotData),
-                deflectionLimit
+                deflectionLimit.toString()
             );
             const teddsDesignJson = JSON.parse(teddsDesign);
             updateTeddsData(teddsDesignJson);

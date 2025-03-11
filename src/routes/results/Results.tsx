@@ -17,7 +17,7 @@ import { useTeddsStore } from "../../hooks/useTeddsStore";
 const Results = () => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    
+
     const teddsData = useTeddsStore((state) => state.teddsData);
     const memberResults = teddsData.memberData;
     const { overview, barSections } = useAnalyseResults(memberResults);
