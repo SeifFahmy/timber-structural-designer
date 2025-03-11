@@ -4,8 +4,8 @@ import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("api", {
     getProcessName: () => ipcRenderer.invoke("get-process-name"),
-    robotImport: (caseIds: string) =>
-        ipcRenderer.invoke("robot-import", caseIds),
+    robotImport: (ulsCaseIds: string, slsCaseIds: string) =>
+        ipcRenderer.invoke("robot-import", ulsCaseIds, slsCaseIds),
     teddsDesign: (parentWindowName: string, robotData: string) =>
         ipcRenderer.invoke("tedds-design", parentWindowName, robotData),
     robotUpdate: (sectionData: string) =>

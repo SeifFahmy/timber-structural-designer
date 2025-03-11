@@ -8,6 +8,10 @@ export interface RobotData {
     ShearMinor: number;
     Axial: number;
     IsAxialMember: boolean;
+    Deflection: number;
+    Area: number;
+    SecondMomentOfArea: number;
+    Length: number;
 }
 
 interface RobotState {

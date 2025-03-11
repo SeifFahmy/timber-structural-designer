@@ -18,7 +18,7 @@ const createWindow = (): void => {
         height: 600,
         width: 800,
         title: "Timber Structural Designer",
-        icon:"static/icons/favicon.ico",
+        icon: "static/icons/favicon.ico",
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
             contextIsolation: true,
@@ -67,7 +67,7 @@ ipcMain.handle("get-process-name", () => {
     return name.substring(0, name.length - 4);
 });
 
-ipcMain.handle("robot-import", async (event, caseIds) => {
+ipcMain.handle("robot-import", async (event, ulsCaseIds, slsCaseIds) => {
     return new Promise((resolve, reject) => {
         // Path to the compiled C# executable
         const isDevelopment = !app.isPackaged;
@@ -85,7 +85,10 @@ ipcMain.handle("robot-import", async (event, caseIds) => {
               );
 
         // Spawn the C# process
-        const cSharpProcess = spawn(csharpExecutablePath, [caseIds]);
+        const cSharpProcess = spawn(csharpExecutablePath, [
+            ulsCaseIds,
+            slsCaseIds,
+        ]);
 
         let result = "";
         let error = "";
