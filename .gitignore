@@ -93,3 +93,6 @@ out/
 
 # Draft ideas space
 ideas/
+
+# API executables
+static/api/*.exe
