@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 export interface TeddsData {
-    memberData: MemberData[];
-    materialData: MaterialData;
+    MemberData: MemberData[];
+    MaterialData: MaterialData;
 }
 
 export interface MemberData {

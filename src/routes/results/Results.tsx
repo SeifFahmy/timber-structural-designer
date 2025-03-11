@@ -19,7 +19,7 @@ const Results = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const teddsData = useTeddsStore((state) => state.teddsData);
-    const memberResults = teddsData.memberData;
+    const memberResults = teddsData.MemberData;
     const { overview, barSections } = useAnalyseResults(memberResults);
 
     const handleRobotUpdate = async () => {
@@ -30,7 +30,7 @@ const Results = () => {
             await (window as any).api.robotUpdate(
                 JSON.stringify({
                     MemberSections: barSections,
-                    MaterialData: teddsData.materialData,
+                    MaterialData: teddsData.MaterialData,
                 })
             );
         } catch (error) {
