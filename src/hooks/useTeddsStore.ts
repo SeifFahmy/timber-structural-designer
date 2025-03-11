@@ -5,7 +5,7 @@ export interface TeddsData {
     materialData: MaterialData;
 }
 
-interface MemberData {
+export interface MemberData {
     id: number;
     section: string;
     result: string;
@@ -16,7 +16,7 @@ interface MemberData {
     outputHtml: string;
 }
 
-interface MaterialData {
+export interface MaterialData {
     Name: string;
     Type: string;
     E: number;

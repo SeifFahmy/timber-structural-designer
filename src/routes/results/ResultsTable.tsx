@@ -10,11 +10,11 @@ import {
     Paper,
     SimpleGrid,
 } from "@mantine/core";
-import { TeddsData, useTeddsStore } from "../../hooks/useTeddsStore";
+import { MemberData, useTeddsStore } from "../../hooks/useTeddsStore";
 import styles from "./ResultsTable.module.css";
 
-const ResultsTable = ({ memberResults }: { memberResults: TeddsData[] }) => {
-    const TableRow = ({ member }: { member: TeddsData }) => {
+const ResultsTable = ({ memberResults }: { memberResults: MemberData[] }) => {
+    const TableRow = ({ member }: { member: MemberData }) => {
         const [opened, { open, close }] = useDisclosure(false);
         const memberData = [
             { title: "Utilisation", content: member.util },

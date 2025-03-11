@@ -1,6 +1,6 @@
-import { TeddsData } from "./useTeddsStore";
+import { MemberData } from "./useTeddsStore";
 
-const useAnalyseResults = (results: TeddsData[]) => {
+const useAnalyseResults = (results: MemberData[]) => {
     let maxUtil = Number.NEGATIVE_INFINITY;
     let designStatus = "PASS";
     let maxDepth = Number.NEGATIVE_INFINITY;

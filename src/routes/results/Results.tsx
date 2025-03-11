@@ -17,7 +17,9 @@ import { useTeddsStore } from "../../hooks/useTeddsStore";
 const Results = () => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const memberResults = useTeddsStore((state) => state.teddsData);
+    
+    const teddsData = useTeddsStore((state) => state.teddsData);
+    const memberResults = teddsData.memberData;
     const { overview, barSections } = useAnalyseResults(memberResults);
 
     const handleRobotUpdate = async () => {
@@ -25,7 +27,12 @@ const Results = () => {
         try {
             // Call the C# executable via Electron's main process
             // const sectionData = useSectionStore((state) => state.sectionData);
-            await (window as any).api.robotUpdate(JSON.stringify(barSections));
+            await (window as any).api.robotUpdate(
+                JSON.stringify({
+                    MemberSections: barSections,
+                    MaterialData: teddsData.materialData,
+                })
+            );
         } catch (error) {
             setErrorMessage(
                 `Something went wrong. Please make sure Robot is open and element IDs have not been changed, then try again. 
