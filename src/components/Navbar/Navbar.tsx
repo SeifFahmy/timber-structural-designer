@@ -4,24 +4,31 @@ import { useNavbarStore } from "../../hooks/useNavbarStore";
 import styles from "./Navbar.module.css";
 import logo from "../../../static/images/logo.png";
 
+export enum NAVBARINDICES {
+    IMPORT = 1,
+    DESIGN = 2,
+    RESULTS = 3,
+    CONTACT = 0,
+}
+
 const navbarData = [
     {
-        number: 1,
+        number: NAVBARINDICES.IMPORT,
         pageRoute: "/",
         pageName: "Import",
     },
     {
-        number: 2,
+        number: NAVBARINDICES.DESIGN,
         pageRoute: "/design",
         pageName: "Design",
     },
     {
-        number: 3,
+        number: NAVBARINDICES.RESULTS,
         pageRoute: "/results",
         pageName: "Results",
     },
     {
-        number: 0,
+        number: NAVBARINDICES.CONTACT,
         pageRoute: "/contact",
         pageName: "Contact",
     },
