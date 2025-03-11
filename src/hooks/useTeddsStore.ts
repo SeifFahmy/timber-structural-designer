@@ -1,6 +1,11 @@
 import { create } from "zustand";
 
 export interface TeddsData {
+    memberData: MemberData[];
+    materialData: MaterialData;
+}
+
+interface MemberData {
     id: number;
     section: string;
     result: string;
@@ -11,12 +16,20 @@ export interface TeddsData {
     outputHtml: string;
 }
 
+interface MaterialData {
+    Name: string;
+    Type: string;
+    E: number;
+    G: number;
+    UnitWeight: number;
+}
+
 interface TeddsState {
-    teddsData: TeddsData[];
-    updateTeddsData: (data: TeddsData[]) => void;
+    teddsData: TeddsData;
+    updateTeddsData: (data: TeddsData) => void;
 }
 
 export const useTeddsStore = create<TeddsState>((set) => ({
-    teddsData: [],
+    teddsData: {} as TeddsData,
     updateTeddsData: (data) => set(() => ({ teddsData: data })),
 }));
