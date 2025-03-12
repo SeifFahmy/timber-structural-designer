@@ -17,6 +17,7 @@ const createWindow = (): void => {
     const mainWindow = new BrowserWindow({
         height: 600,
         width: 800,
+        show: false,
         title: "Timber Structural Designer",
         icon: "static/icons/favicon.ico",
         webPreferences: {
@@ -25,7 +26,11 @@ const createWindow = (): void => {
             allowRunningInsecureContent: false,
         },
     });
-    mainWindow.maximize();
+    mainWindow.once("ready-to-show", () => {
+        mainWindow.maximize();
+        mainWindow.show();
+        mainWindow.focus();
+    });
 
     // and load the index.html of the app.
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
